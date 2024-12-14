@@ -14,8 +14,12 @@ This guide explains the steps to set up and connect XLaunch, a Virtual Machine (
 ### 1. Setting up VirtualBox
 
 1. Install **VirtualBox** and create a virtual machine (VM).
-2. Install **Linux Mint** inside the VM.
-3. Configure VM network settings:
+2. Install **Linux Mint / Ubuntu** inside the VM.
+  * Download Here:
+    * **[Linux Mint](https://linuxmint.com/)**
+    * **[Ubuntu](https://ubuntu.com/)**
+   
+4. Configure VM network settings:
    * Go to `Settings` → `Network`
    * Enable **Adapter 3** and select **Host-Only Adapter**
    * Choose **VirtualBox Ethernet Adapter** in the second option
@@ -120,7 +124,7 @@ This guide explains the steps to set up and connect XLaunch, a Virtual Machine (
 3. Verify firewall settings may be blocking connections.
 4. If you encounter error while installing virtualbox
    Example: Missing Dependencies Python Core / win32api make sure to install python, If Python is installed use `pip install pywin32`
-5. If you encounter **Microsoft Visual C++ 2019 Redistributable** Error
+5. If you encounter **Microsoft Visual C++ 2019 Redistributable** Error,
   Install the package from here - [Microsoft Visual C++ 2019 Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-microsoft-visual-c-redistributable-version)
    
 ## Contributions
