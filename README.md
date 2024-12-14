@@ -53,15 +53,17 @@ This guide explains the steps to set up and connect XLaunch, a Virtual Machine (
    $ ifconfig
    ```
    * Note the IPv4 address for the `enp0s9` port (e.g., `192.168.56.103`)
+   * This might be diffrent in your system use `ifconfig` to know the port number
 
 ### 4. Connecting VS Code to VM
 
 1. Open VS Code and install the **Remote - SSH** extension.
 2. Click the **Remote SSH** icon and add a new host:
    ```
-   yashwanth@192.168.56.103
+   hostname@192.168.56.xxx
    ```
-3. Enter your Linux Mint login credentials when prompted.
+3. `hostname` = Your system's hostname, x = number of your system's IP Address.
+4. Enter your Linux Mint login credentials when prompted.
 
 ### 5. Setting up XLaunch
 
@@ -87,6 +89,7 @@ This guide explains the steps to set up and connect XLaunch, a Virtual Machine (
   $ ifconfig
   ```
 * If network is not configured, use:
+* `enp0s9` is given as an example, in your system this might be diffrent use `ifconfig` from previous step to know the port number
   ```bash
   $ dhclient -v enp0s9
   ```
@@ -115,7 +118,11 @@ This guide explains the steps to set up and connect XLaunch, a Virtual Machine (
 1. Restart services if you encounter unexpected issues.
 2. Double-check network configurations.
 3. Verify firewall settings may be blocking connections.
-
+4. If you encounter error while installing virtualbox
+   Example: Missing Dependencies Python Core / win32api make sure to install python, If Python is installed use `pip install pywin32`
+5. If you encounter **Microsoft Visual C++ 2019 Redistributable** Error
+  Install the package from here - [Microsoft Visual C++ 2019 Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-microsoft-visual-c-redistributable-version)
+   
 ## Contributions
 
 Contributions and improvements to this guide are welcome! Please open an issue or submit a pull request.
