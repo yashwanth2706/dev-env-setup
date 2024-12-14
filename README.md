@@ -31,7 +31,7 @@ This guide explains the steps to set up and connect XLaunch, a Virtual Machine (
 
 ## 3.1 Automated Setup Script (Recommended)
 
-###If used this step directly jump to setp 4
+### If used this step directly jump to setp 4
 
 ### Prerequisites
 - Ubuntu or Linux Mint
