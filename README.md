@@ -21,8 +21,9 @@ This guide explains the steps to set up and connect XLaunch, a Virtual Machine (
    
 3. Configure VM network settings:
    * Go to `Settings` → `Network`
+   * Enable **Adapter 2** and select **NAT**
    * Enable **Adapter 3** and select **Host-Only Adapter**
-   * Choose **VirtualBox Ethernet Adapter** in the second option
+     In the second option choose **VirtualBox Ethernet Adapter**
 
 ### 2. Enabling 3D Acceleration
 
