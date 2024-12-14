@@ -19,7 +19,7 @@ This guide explains the steps to set up and connect XLaunch, a Virtual Machine (
     * **[Linux Mint](https://linuxmint.com/)**
     * **[Ubuntu](https://ubuntu.com/)**
    
-4. Configure VM network settings:
+3. Configure VM network settings:
    * Go to `Settings` → `Network`
    * Enable **Adapter 3** and select **Host-Only Adapter**
    * Choose **VirtualBox Ethernet Adapter** in the second option
