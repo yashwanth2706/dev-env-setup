@@ -29,7 +29,33 @@ This guide explains the steps to set up and connect XLaunch, a Virtual Machine (
 1. Go to `Settings` → `Display`
 2. Enable the **3D Acceleration** checkbox
 
-### 3. Configuring Linux Mint (Inside the VM)
+## 3.1 Automated Setup Script (Recommended)
+
+###If used this step directly jump to setp 4
+
+### Prerequisites
+- Ubuntu or Linux Mint
+- sudo privileges
+- Internet connection
+
+### Usage
+1. Save the script as `vm_dev_setup.sh`
+2. Make it executable:
+   ```bash
+   chmod +x vm_dev_setup.sh
+3. Run with `sudo`:
+   ```bash
+   sudo ./vm_dev_setup.sh
+   
+* What the Script Does
+- Checks and installs system prerequisites
+- Configures SSH
+- Sets up network interfaces
+- Configures X11 Forwarding
+- Enables firewall
+- Installs development tools
+
+### 3.2 (Optional) Manually Configuring Linux Mint (Inside the VM with Terminal)
 
 1. Open the terminal and install the SSH client:
    ```bash
