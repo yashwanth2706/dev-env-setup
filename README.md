@@ -31,9 +31,7 @@ If you are running Windows and want to have a linux envirornment for development
 1. Go to `Settings` → `Display`
 2. Enable the **3D Acceleration** checkbox
 
-## 3.1 Automated Setup Script (Recommended)
-
-### If used this step directly jump to setp 4
+## 3 Automated Setup Script (This will Install and Configure required tools and packages)
 
 ### Prerequisites
 - Ubuntu or Linux Mint
@@ -41,7 +39,7 @@ If you are running Windows and want to have a linux envirornment for development
 - Internet connection
 
 ### Usage
-1. Save the script as `vm_dev_setup.sh`
+1. Save the script as `vm_dev_setup.sh` or clone this repository and run the script
 2. Make it executable:
    ```bash
    chmod +x vm_dev_setup.sh
@@ -56,24 +54,6 @@ If you are running Windows and want to have a linux envirornment for development
 - Configures X11 Forwarding
 - Enables firewall
 - Installs development tools
-
-### 3.2 (Optional) Manually Configuring Linux Mint (Inside the VM with Terminal)
-
-1. Open the terminal and install the SSH client:
-   ```bash
-   $ sudo apt install openssh-client
-   ```
-
-2. Check SSH status to ensure it's active:
-   ```bash
-   $ service ssh status
-   ```
-
-3. Find your VM's network port and IP address:
-   ```bash
-   $ ifconfig
-   ```
-   * Identify the correct port (in this case, `enp0s9`)
 
 4. Configure the network IP:
    ```bash
