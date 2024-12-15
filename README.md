@@ -33,6 +33,8 @@ If you are running Windows and want to have a linux envirornment for development
 
 ## 3 Automated Setup Script (This will Install and Configure required tools and packages)
 
+### Open Terminal in VM and Clone this repository and run the script as mentioned in this guide
+
 ### Prerequisites
 - Ubuntu or Linux Mint
 - sudo privileges
@@ -55,18 +57,6 @@ If you are running Windows and want to have a linux envirornment for development
 - Enables firewall
 - Installs development tools
 
-4. Configure the network IP:
-   ```bash
-   $ dhclient -v enp0s9
-   ```
-
-5. Verify the IP address:
-   ```bash
-   $ ifconfig
-   ```
-   * Note the IPv4 address for the `enp0s9` port (e.g., `192.168.56.103`)
-   * This might be diffrent in your system use `ifconfig` to know the port number
-
 ### 4. Connecting VS Code to VM
 
 1. Open VS Code and install the **Remote - SSH** extension.
@@ -76,19 +66,32 @@ If you are running Windows and want to have a linux envirornment for development
    ```
 3. `hostname` = Your system's hostname, x = number of your system's IP Address.
 4. Enter your Linux Mint login credentials when prompted.
+5. After successful connection you should see $ sign, In Vscode use: Ctrl + `  and select terminal to see the $ sign
 
 ### 5. Setting up XLaunch
 
 1. Install **XLaunch** on your host machine.
 2. Run XLaunch and select the following options:
    * `Next` → `Next` → **Disable Access Control** (check this box) → `Finish`
-3. Verify the setup by running:
+3. In Vscode terminal write following script to setup XDISPLAY.
+   * `export DISPLAY=192.168.56.1:0.0`
+5. Verify the setup by running:
    ```bash
    $ xeyes
    ```
    * A pair of animated eyes should appear, confirming the connection.
 
+### 6. Below mentioned things should be repeated everytime when Reoppening / Restarting VirtualBox
+* Use `ifconfig` to see `NETWORK_INTERFACE_NAME` IPv4 address will be visible under this
+* Write this command, example: $`dhclient -v enp0s8` or $`dhclient -v NETWORK_INTERFACE_NAME`
+  
+  ## If XLaunch is not required for your deveopment envirornment skip below steps
+     * Reopening XLaunch and Disabling access control (Reffer **5. Setting up XLaunch** Step 2:)
+     * Write this command $`export DISPLAY=192.168.56.1:0.0` and use `xeyes` to verify the Setup
+
 ## Troubleshooting
+
+### All IP Address and Port Numbers in this guide are used as an example and should not be treated as your system's IP Address / NETWORK_INTERFACE_NAME
 
 ### 1. SSH Connection Issues
 
@@ -101,10 +104,12 @@ If you are running Windows and want to have a linux envirornment for development
   $ ifconfig
   ```
 * If network is not configured, use:
-* `enp0s9` is given as an example, in your system this might be diffrent use `ifconfig` from previous step to know the port number
+* `enp0s9` is given as an example, in your system this might be diffrent use `ifconfig` from previous step to know the NETWORK_INTERFACE_NAME name
   ```bash
   $ dhclient -v enp0s9
   ```
+  When used `ifconfig` IPv4 Adress will be visible Ex: `192.168.56.103` under NETWORK_INTERFACE_NAME `enp0s8` during network configuration using `dhclient`
+  this `enp0s8` NETWORK_INTERFACE_NAME should be selected, if used different NETWORK_INTERFACE_NAME configuration will fail and ssh connection will fail
 
 ### 2. Display Not Working
 
