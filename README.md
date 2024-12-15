@@ -1,13 +1,14 @@
 # XLaunch and Virtual Machine Connection with VS Code
 
 This guide explains the steps to set up and connect XLaunch, a Virtual Machine (VM) running Linux Mint, and VS Code for a seamless development environment.
+If you are running Windows and want to have a linux envirornment for development this guide will help.
 
 ## Prerequisites
 
 * **VS Code**: [Download here](https://code.visualstudio.com/download)
 * **Remote - SSH Extension**: Install it from the VS Code marketplace
 * **Oracle VirtualBox**: [Download here](https://www.virtualbox.org/wiki/Downloads)
-* **XLaunch**: [Download here](https://sourceforge.net/projects/xming/)
+* **XLaunch**: [Download here](https://sourceforge.net/projects/vcxsrv/)
 
 ## Step-by-Step Guide
 
