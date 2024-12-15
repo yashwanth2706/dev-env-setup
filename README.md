@@ -80,14 +80,18 @@ If you are running Windows and want to have a linux envirornment for development
    $ xeyes
    ```
    * A pair of animated eyes should appear, confirming the connection.
+     
+### Your set up is complete makesure to refer Step 6
 
 ### 6. Below mentioned things should be repeated everytime when Reoppening / Restarting VirtualBox
+
 * Use `ifconfig` to see `NETWORK_INTERFACE_NAME` IPv4 address will be visible under this
 * Write this command, example: $`dhclient -v enp0s8` or $`dhclient -v NETWORK_INTERFACE_NAME`
   
   ## If XLaunch is not required for your deveopment envirornment skip below steps
-     * Reopening XLaunch and Disabling access control (Reffer **5. Setting up XLaunch** Step 2:)
-     * Write this command $`export DISPLAY=192.168.56.1:0.0` and use `xeyes` to verify the Setup
+     * Reopen XLaunch and Disabling access control (Reffer **5. Setting up XLaunch** Step 2:)
+     * Write this command `export DISPLAY=192.168.56.1:0.0` and use `xeyes` to verify the Setup
+       Do not (delete / kill) this (terminal / process) if this happens in the new terminal rewrite the command: `export DISPLAY=192.168.56.1:0.0` else XDISPLAY won't work
 
 ## Troubleshooting
 
