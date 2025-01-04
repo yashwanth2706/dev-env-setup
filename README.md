@@ -1,4 +1,4 @@
-# Setup Development Envirornment for Seamless development with VScode
+# Development Envirornment for Seamless development with VScode
 
 This guide explains the steps to set up and connect XLaunch, a Virtual Machine (VM) running Linux Mint, and VS Code for a seamless development environment.
 If you are running Windows and want to have a linux envirornment for development this guide will help.
