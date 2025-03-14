@@ -1,4 +1,4 @@
-# Virtual Machine (Linux Mint) Setup Guide
+# Development Envirornment with vscode, linux-mint and X Display (XLaunch)
 
 ## System Overview
 
@@ -79,6 +79,26 @@ XLaunch is used to enable graphical applications on the VM through an X server. 
      ```sh
      echo 'export DISPLAY=192.168.193.1:0' >> ~/.bashrc
      ```
+   - Ensure `xclock` is installed in the guest OS:
+     ```sh
+     sudo apt install x11-apps
+     ```
+
+## VS Code SSH Configuration
+
+VS Code supports SSH communication through the **Remote - SSH** extension, allowing direct access to the VM. To set it up:
+
+1. Install **Visual Studio Code** on the Host OS from [here](https://code.visualstudio.com/).
+2. Install the **Remote - SSH** extension in VS Code.
+3. Open VS Code and press **Ctrl + Shift + P**, then search for:
+   ```sh
+   Remote-SSH: Connect to Host
+   ```
+4. Add a new SSH connection with:
+   ```sh
+   ssh user@192.168.193.1
+   ```
+5. Once connected, VS Code will allow you to edit and manage files in the VM directly.
 
 ## Setup Instructions
 
