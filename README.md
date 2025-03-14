@@ -1,150 +1,167 @@
-# A Guide to setting up development envirornment for seamless development
+# Virtual Machine (Linux Mint) Setup Guide
 
-This guide explains the steps to set up and connect XLaunch, a Virtual Machine (VM) running Linux Mint, and VS Code for a seamless development environment.
-If you are running Windows and want to have a linux envirornment for development this guide will help.
+## System Overview
 
-## Prerequisites
+This document provides the details and setup instructions for the Virtual Machine running **Linux Mint 21.1 Vera** (based on Ubuntu 22.04).
 
-* **VS Code**: [Download here](https://code.visualstudio.com/download)
-* **Remote - SSH Extension**: Install it from the VS Code marketplace
-* **Oracle VirtualBox**: [Download here](https://www.virtualbox.org/wiki/Downloads)
-* **XLaunch**: [Download here](https://sourceforge.net/projects/vcxsrv/)
+## Virtual Machine Specifications
 
-## Step-by-Step Guide
+- **OS:** Linux Mint 21.1 Vera (Ubuntu 22.04)
+- **Kernel Version:** 5.15.0-130-generic x86_64
+- **Virtualization Platform:** VirtualBox
+- **CPU:** Intel Core i5-8365U (Single Core Assigned)
+- **RAM:** 5.83 GiB
+- **Storage:** 25 GiB VirtualBox Hard Disk
+- **Swap Space:** 1.14 GiB
+- **Graphics Adapter:** VMware SVGA II Adapter
+- **Screen Resolution:** 1280x720
+- **Audio Driver:** Intel 82801AA AC97 Audio (ALSA, PulseAudio, PipeWire)
+- **Network Adapters:**
+  - **Primary Adapter:** Intel 82540EM Gigabit Ethernet (1000 Mbps, Full Duplex)
+  - **Secondary Adapter:** Intel 82540EM Gigabit Ethernet (1000 Mbps, Full Duplex)
 
-### 1. Setting up VirtualBox
+## Host System Details
 
-1. Install **VirtualBox** and create a virtual machine (VM).
-2. Install **Linux Mint or Ubuntu** inside the VM.
-  * Download Here:
-    * **[Linux Mint](https://linuxmint.com/)**
-     OR
-    * **[Ubuntu](https://ubuntu.com/)**
-   
-3. Configure VM network settings:
-   * Go to `Settings` → `Network`
-   * Enable **Adapter 2** and select **NAT**
-   * Enable **Adapter 3** and select **Host-Only Adapter**
-     In the second option choose **VirtualBox Ethernet Adapter**
+- **Host OS:** Windows 11 Pro (Build 26100)
+- **Host Device:** Dell Latitude 5400
+- **Processor:** Intel Core i5-8365U
+- **RAM:** 8GB
+- **Virtualization Support:** Enabled
+- **Python Dependency:**
+  - **Python must be installed** on the Host OS for VirtualBox to function properly.
+  - If Python is removed, VirtualBox may not work as expected.
+  - Install Python from the official [Python website](https://www.python.org/).
+  - **PyWin32 library** is essential for proper VirtualBox operation and should be installed via:
+    ```sh
+    pip install pywin32
+    ```
 
-### 2. Enabling 3D Acceleration
+## Checking Virtual Machine Logs and Python Dependency
 
-1. Go to `Settings` → `Display`
-2. Enable the **3D Acceleration** checkbox
+To check VirtualBox logs and see how it relies on Python:
 
-## 3 Automated Setup Script (This will Install and Configure required tools and packages)
-
-### Open Terminal in VM and Clone this repository and run the script as mentioned in this guide
-
-### Prerequisites
-- Ubuntu or Linux Mint
-- sudo privileges
-- Internet connection
-
-### Usage
-1. Save the script as `vm_dev_setup.sh` or clone this repository and run the script
-2. Make it executable:
-   ```bash
-   chmod +x vm_dev_setup.sh
-3. Run with `sudo`:
-   ```bash
-   sudo ./vm_dev_setup.sh
-   
-* What the Script Does
-- Checks and installs system prerequisites
-- Configures SSH
-- Sets up network interfaces
-- Configures X11 Forwarding
-- Enables firewall
-- Installs development tools
-
-### 4. Connecting VS Code to VM
-
-1. Open VS Code and install the **Remote - SSH** extension.
-2. Click the **Remote SSH** icon and add a new host:
+1. Open **VirtualBox** and go to **Machine > Show Log**.
+2. Look for any Python-related errors in the **VBox.log** file.
+3. To check the Python version VirtualBox uses, run:
+   ```sh
+   python --version
    ```
-   hostname@192.168.56.xxx
+   or
+   ```sh
+   where python
    ```
-3. `hostname` = Your system's hostname, x = number of your system's IP Address.
-4. Enter your Linux Mint login credentials when prompted.
-5. After successful connection you should see $ sign, In Vscode use: Ctrl + `  and select terminal to see the $ sign
 
-### 5. Setting up XLaunch
+## XLaunch & X Display Configuration
 
-1. Install **XLaunch** on your host machine.
-2. Run XLaunch and select the following options:
-   * `Next` → `Next` → **Disable Access Control** (check this box) → `Finish`
-3. In Vscode terminal write following script to setup XDISPLAY.
-   * `export DISPLAY=192.168.56.1:0.0`
-5. Verify the setup by running:
-   ```bash
-   $ xeyes
-   ```
-   * A pair of animated eyes should appear, confirming the connection.
-     
-### Your set up is complete makesure to refer Step 6
+XLaunch is used to enable graphical applications on the VM through an X server. To set it up:
 
-### 6. Below mentioned things should be repeated everytime when Reoppening / Restarting VirtualBox
+1. **Install X Server on Host OS (Windows)**:
+   - Download and install **VcXsrv Windows X Server** from [here](https://sourceforge.net/projects/vcxsrv/).
+2. **Configure XLaunch:**
+   - Open **XLaunch** and select **Multiple Windows Mode**.
+   - Set Display Number to **0**.
+   - Enable **Disable Access Control**.
+   - Click **Finish** to start the X Server.
+3. **Configure the VM to use X11 Forwarding:**
+   - Install necessary dependencies:
+     ```sh
+     sudo apt update && sudo apt install xauth x11-xserver-utils x11-apps
+     ```
+   - Enable X11 Forwarding:
+     ```sh
+     export DISPLAY=192.168.193.1:0
+     ```
+   - Run a GUI application to test:
+     ```sh
+     xclock
+     ```
+   - If `xclock` runs successfully, add the following line to **.bashrc** to persist the configuration:
+     ```sh
+     echo 'export DISPLAY=192.168.193.1:0' >> ~/.bashrc
+     ```
 
-* Use `ifconfig` to see `NETWORK_INTERFACE_NAME` IPv4 address will be visible under this
-* Write this command, example: $`dhclient -v enp0s8` or $`dhclient -v NETWORK_INTERFACE_NAME`
-  
-  ## If XLaunch is not required for your deveopment envirornment skip below steps
-     * Reopen XLaunch and Disabling access control (Reffer **5. Setting up XLaunch** Step 2:)
-     * Write this command `export DISPLAY=192.168.56.1:0.0` and use `xeyes` to verify the Setup
-       Do not (delete / kill) this (terminal / process) if this happens in the new terminal rewrite the command: `export DISPLAY=192.168.56.1:0.0` else XDISPLAY won't work
+## Setup Instructions
+
+### 1. Installing Linux Mint on VirtualBox
+
+1. Download the **Linux Mint 21.1 Vera ISO** from the official site.
+2. Create a new VM in **VirtualBox** with the following settings:
+   - Type: **Linux**
+   - Version: **Ubuntu (64-bit)**
+   - Memory: **6GB (recommended)**
+   - Storage: **25GB (dynamically allocated)**
+3. Attach the ISO file and boot the VM to install Linux Mint.
+
+### 2. Configuring Virtual Machine Performance
+
+- **Increase CPU & RAM Allocation:**
+  - Go to **VirtualBox Settings > System**
+  - Increase **Processor Count** to at least **2 Cores**
+  - Increase **RAM** to **6GB or more** (if available)
+- **Enable 3D Acceleration for Better Graphics Performance:**
+  - Go to **VirtualBox Settings > Display**
+  - Enable **3D Acceleration**
+  - Increase **Video Memory** to **128MB or higher**
+
+### 3. Network Configuration
+
+- **Adapter 1 (Primary Network - NAT):**
+  - Provides internet access inside the VM.
+- **Adapter 2 (Host-Only Network - 192.168.193.1):**
+  - Used for direct communication between the Host and VM.
+- Verify network connectivity using:
+  ```sh
+  ip a
+  ping google.com
+  ```
+
+### 4. Enabling Clipboard & File Sharing
+
+- Install **VirtualBox Guest Additions**:
+  ```sh
+  sudo apt update && sudo apt install virtualbox-guest-utils virtualbox-guest-x11 virtualbox-guest-dkms
+  ```
+- Enable **Bidirectional Clipboard & Drag-and-Drop** in **VirtualBox Settings > General > Advanced**.
+
+### 5. Setting Up SSH Access (Optional)
+
+- Install SSH Server in VM:
+  ```sh
+  sudo apt install openssh-server
+  sudo systemctl enable ssh
+  sudo systemctl start ssh
+  ```
+- Connect from Host:
+  ```sh
+  ssh user@192.168.193.1
+  ```
+
+## Optimization & Maintenance
+
+- **Update System Regularly:**
+  ```sh
+  sudo apt update && sudo apt upgrade -y
+  ```
+- **Clear Unused Packages:**
+  ```sh
+  sudo apt autoremove && sudo apt clean
+  ```
+- **Check System Resource Usage:**
+  ```sh
+  htop
+  ```
 
 ## Troubleshooting
 
-### All IP Address and Port Numbers in this guide are used as an example and should not be treated as your system's IP Address / NETWORK_INTERFACE_NAME
-
-### 1. SSH Connection Issues
-
-* Ensure the SSH service is running inside the VM:
-  ```bash
-  $ service ssh start
+- **If network doesn’t work:**
+  ```sh
+  sudo dhclient enp0s3
   ```
-* Verify the network port and IP address:
-  ```bash
-  $ ifconfig
+- **If VM is slow, increase RAM & CPU allocation in VirtualBox settings.**
+- **Check logs for issues:**
+  ```sh
+  dmesg | tail -50
   ```
-* If network is not configured, use:
-* `enp0s9` is given as an example, in your system this might be diffrent use `ifconfig` from previous step to know the NETWORK_INTERFACE_NAME name
-  ```bash
-  $ dhclient -v enp0s9
-  ```
-  When used `ifconfig` IPv4 Adress will be visible Ex: `192.168.56.103` under NETWORK_INTERFACE_NAME `enp0s8` during network configuration using `dhclient`
-  this `enp0s8` NETWORK_INTERFACE_NAME should be selected, if used different NETWORK_INTERFACE_NAME configuration will fail and ssh connection will fail
 
-### 2. Display Not Working
-
-* Confirm that 3D acceleration is enabled in the VM settings.
-* Check if XLaunch is running on your host machine.
-* Ensure **Disable Access Control** is checked in XLaunch settings.
-
-## Screenshots and References
-
-* Add screenshots of the setup process (e.g., network settings, SSH configuration, and XLaunch test).
-* Official documentation:
-  - [VS Code Remote SSH](https://code.visualstudio.com/docs/remote/ssh)
-  - [VirtualBox Network Setup](https://www.virtualbox.org/manual/ch06.html)
-
-## Notes
-
-- Always ensure your software is up to date.
-- Take care when modifying system settings.
-- Backup your VM and important data before making significant changes.
-
-## Troubleshooting Tips
-
-1. Restart services if you encounter unexpected issues.
-2. Double-check network configurations.
-3. Verify firewall settings may be blocking connections.
-4. If you encounter error while installing virtualbox
-   Example: Missing Dependencies Python Core / win32api make sure to install python, If Python is installed use `pip install pywin32`
-5. If you encounter **Microsoft Visual C++ 2019 Redistributable** Error,
-  Install the package from here - [Microsoft Visual C++ 2019 Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-microsoft-visual-c-redistributable-version)
-   
-## Contributions
-
-Contributions and improvements to this guide are welcome! Please open an issue or submit a pull request.
+---
+This guide provides the essential setup and optimization steps for your Linux Mint Virtual Machine. Feel free to modify configurations based on your requirements!
