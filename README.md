@@ -1,40 +1,39 @@
-# Development Envirornment with vscode, linux-mint and X Display (XLaunch)
+# Development Envirornment for Web, Desktop, GUI applications with linux terminal support in Windows Host with VirtualBox, vscode, Xserver (XDisplay)
+
+## Development Envirornment Architecture Overview
+
+## Windows Host => VirtualBox : Linux Mint (Guest OS) => vscode => Xlaunch
 
 ## System Overview
 
 This document provides the details and setup instructions for the Virtual Machine running **Linux Mint 21.1 Vera** (based on Ubuntu 22.04).
 
-## Virtual Machine Specifications
-
-- **OS:** Linux Mint 21.1 Vera (Ubuntu 22.04)
-- **Kernel Version:** 5.15.0-130-generic x86_64
-- **Virtualization Platform:** VirtualBox
-- **CPU:** Intel Core i5-8365U (Single Core Assigned)
-- **RAM:** 5.83 GiB
-- **Storage:** 25 GiB VirtualBox Hard Disk
-- **Swap Space:** 1.14 GiB
-- **Graphics Adapter:** VMware SVGA II Adapter
-- **Screen Resolution:** 1280x720
-- **Audio Driver:** Intel 82801AA AC97 Audio (ALSA, PulseAudio, PipeWire)
-- **Network Adapters:**
-  - **Primary Adapter:** Intel 82540EM Gigabit Ethernet (1000 Mbps, Full Duplex)
-  - **Secondary Adapter:** Intel 82540EM Gigabit Ethernet (1000 Mbps, Full Duplex)
-
 ## Host System Details
 
-- **Host OS:** Windows 11 Pro (Build 26100)
-- **Host Device:** Dell Latitude 5400
+- **Host OS:** Windows 11 (64-bit)
 - **Processor:** Intel Core i5-8365U
 - **RAM:** 8GB
 - **Virtualization Support:** Enabled
 - **Python Dependency:**
-  - **Python must be installed** on the Host OS for VirtualBox to function properly.
-  - If Python is removed, VirtualBox may not work as expected.
+  - **_Python_ must be installed** on the Host OS for VirtualBox to function properly.
+  - If *python* is removed, VirtualBox will not function properly or may not work as expected.
   - Install Python from the official [Python website](https://www.python.org/).
-  - **PyWin32 library** is essential for proper VirtualBox operation and should be installed via:
+  - **PyWin32 library** is essential for proper VirtualBox operation and should be installed In Host System CMD via:
     ```sh
     pip install pywin32
     ```
+
+## Virtual Machine Specifications
+
+- **OS:** Linux Mint 21.1 Vera (Ubuntu 22.04)
+- **Kernel Version:** 5.15.0-130-generic x86_64
+- **Virtualization Platform:** VirtualBox, Download from [Here](https://www.virtualbox.org/)
+- **CPU:** Intel Core i5-8365U (Single Core Assigned)
+- **RAM:** 4 GiB
+- **Storage:** 60 GiB VirtualBox Hard Disk
+- **Network Adapters:**
+  - **Primary Adapter:** Intel 82540EM Gigabit Ethernet (1000 Mbps, Full Duplex)
+  - **Secondary Adapter:** Intel 82540EM Gigabit Ethernet (1000 Mbps, Full Duplex)
 
 ## Checking Virtual Machine Logs and Python Dependency
 
