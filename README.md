@@ -1,66 +1,91 @@
-Development Envirornment for Web, Desktop, GUI applications with linux terminal support in Windows Host with VirtualBox, vscode, Xserver (XDisplay) and SSH
+# Development Environment Setup Guide
 
-IMPORTANT!
+This guide will help you set up a development environment for web, desktop, and GUI applications with Linux terminal support on a Windows host using VirtualBox, VSCode, XServer (XDisplay), and SSH.
 
-Before we proceed:
-Make sure python is installed, if not installed install from https://www.python.org/
-In Windows CMD type and install pywin32
-```pip install pywin32```
+## Important Prerequisites
 
-This'll make sure that virtual box will install properly and won't face any issues, virtula box relies on python and pywin32
-uninstalling python from Host machine or removing pywin32 will distrupt the functionalities of the virtualbox
+Before proceeding, ensure Python is installed on your Windows system:
 
-In Windows
+1. If not installed, download and install Python from [https://www.python.org/](https://www.python.org/)
+2. Install pywin32 by running the following command in Windows Command Prompt:
+   ```
+   pip install pywin32
+   ```
 
-1. Insall openSSH server:
-Open the Settings app, go to Apps > Optional featuresClick Add a feature and select OpenSSH Server/ OpenSSH Clinet
+> **Note:** VirtualBox relies on Python and pywin32. Uninstalling Python from your host machine or removing pywin32 will disrupt the functionality of VirtualBox.
 
-Alternatively, 
-You can use PowerShell as Administrator to install the OpenSSH Server: Get-WindowsCapability -Name OpenSSH.Server.Feature -Online | Enable-WindowsOptionalFeature -Online -NoRestart
+## Windows Host Configuration
 
-2. Configure OpenSSH Server:
-Open the Services app and find the OpenSSH SSH Server service.
-Set the startup type to Automatic and start the service. 
+### Install OpenSSH Server
 
-3. Configure Windows Firewall:
-Open PowerShell as Administrator and run the following command to allow SSH traffic through the firewall: New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
+**Option 1: Using Settings app**
+1. Open the Settings app
+2. Go to Apps > Optional features
+3. Click "Add a feature"
+4. Select OpenSSH Server and OpenSSH Client
 
+**Option 2: Using PowerShell**
+```powershell
+Get-WindowsCapability -Name OpenSSH.Server.Feature -Online | Enable-WindowsOptionalFeature -Online -NoRestart
+```
 
-SETUP and INSTALLATION GUIDE:
+### Configure OpenSSH Server
 
-SETUP:
+1. Open the Services app
+2. Find the "OpenSSH SSH Server" service
+3. Set the startup type to "Automatic"
+4. Start the service
 
-Downlaod VirtualBox in windows: https://www.virtualbox.org/
-Download LinuxMint (Cinnamon Edition): https://linuxmint.com/
+### Configure Windows Firewall
 
-If you prefer using different edition you can download as per your prefference
-If you prefer using Ubuntu (Optional) https://ubuntu.com/
+Open PowerShell as Administrator and run:
+```powershell
+New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
+```
 
-Downlaod VScode: https://code.visualstudio.com/
+## Setup and Installation
 
-Download Xserver: https://sourceforge.net/projects/vcxsrv/
+### Required Software
 
-INSTALLATION:
+1. **VirtualBox**: Download from [https://www.virtualbox.org/](https://www.virtualbox.org/)
+2. **Linux Mint** (Cinnamon Edition): Download from [https://linuxmint.com/](https://linuxmint.com/)
+   - If you prefer a different edition, download as per your preference
+   - Ubuntu is also an option: [https://ubuntu.com/](https://ubuntu.com/)
+3. **VSCode**: Download from [https://code.visualstudio.com/](https://code.visualstudio.com/)
+4. **XServer**: Download from [https://sourceforge.net/projects/vcxsrv/](https://sourceforge.net/projects/vcxsrv/)
 
-Install VirtualBox
-Proceed with default settings recommended by virtualbox, nothing needs to be changed
+### Installation Steps
 
-Install VScode
-Proceed with default settings recommended by VScode, nothing needs to be changed
+1. **Install VirtualBox**
+   - Proceed with default settings recommended by VirtualBox
 
-Install Xserver
-Proceed with default settings recommended by vcxsrv, nothing needs to be changed
+2. **Install VSCode**
+   - Proceed with default settings recommended by VSCode
 
-GUIDE:
+3. **Install XServer**
+   - Proceed with default settings recommended by vcxsrv
 
-Open VirtualBox and click on New, locate LinuxMint ISO file and click finish
-Press start button after the succsfull boot, select Linux Mint (Compatability Mode) and proceed to Install in VirtualBox
+## Configuration Guide
 
-After pressing Install now, in the last step setup username, password and check automatic login to avoid entering password everytime, you can change this setting anytime if required
+### Setting Up Linux in VirtualBox
 
-After Linux Mint Installation is successful in virtualbox
-open terminal and write below command and press enter
+1. Open VirtualBox and click on "New"
+2. Locate the Linux Mint ISO file and click "Finish"
+3. Press the start button after successful boot
+4. Select "Linux Mint (Compatibility Mode)" and proceed with installation
 
+### Completing Linux Installation
+
+1. After pressing "Install now", proceed through the installation steps
+2. In the final step, set up your username and password
+3. Check "Automatic login" to avoid entering password every time (you can change this setting later if required)
+
+### Configuring Linux for Development
+
+After Linux Mint installation is successful, open the terminal and run these commands:
+
+```bash
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install openssh-server openssh-client xclock xeyes
+```
